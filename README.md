@@ -84,6 +84,10 @@ terraform {
 terraform init
 terraform apply --auto-approve
 ```
+Outputs:
+```
+endpoint = "https://0BA23B64A316C8241778E514A15DA062.gr7.ap-northeast-1.eks.amazonaws.com"
+```
 #### 3. Update kubeconfig
 If you modified `eks cluster name` in main.tf you need to change below command follow you eks cluster name.
 ```
@@ -105,8 +109,37 @@ kubectl get svc
 ```
 Output:
 ```
-
+[root@ip-172-31-47-29 eks]# kubectl get svc
+NAME                                      TYPE           CLUSTER-IP       EXTERN
+AL-IP                                                                   PORT(S)
+                     AGE
+argocd-applicationset-controller          ClusterIP      172.20.151.199   <none>
+                                                                        7000/TCP
+,8080/TCP            18s
+argocd-dex-server                         ClusterIP      172.20.23.92     <none>
+                                                                        5556/TCP
+,5557/TCP,5558/TCP   18s
+argocd-metrics                            ClusterIP      172.20.76.23     <none>
+                                                                        8082/TCP
+                     18s
+argocd-notifications-controller-metrics   ClusterIP      172.20.117.174   <none>
+                                                                        9001/TCP
+                     18s
+argocd-redis                              ClusterIP      172.20.92.220    <none>
+                                                                        6379/TCP
+                     18s
+argocd-repo-server                        ClusterIP      172.20.183.168   <none>
+                                                                        8081/TCP
+,8084/TCP            18s
+argocd-server                             LoadBalancer   172.20.93.209    a330c2
+0a82437414eaa3d06b6e62a7be-867279894.ap-northeast-1.elb.amazonaws.com   80:32274
+/TCP,443:31130/TCP   18s
+argocd-server-metrics                     ClusterIP      172.20.33.154    <none>
+                                                                        8083/TCP
+                     18s
+[root@ip-172-31-47-29 eks]#
 ```
+Copy Loadbalancer dns name of `argocd-server` and open in your browser
 #### 7. Get argocd password
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
@@ -120,7 +153,7 @@ cd ../jenkins
 ```
 #### 1. Modified backend
 
-Before we initialize it we need to modified `main.tf` file in eks folder use `output` of backend
+Before we initialize it we need to modified `main.tf` file in jenkins folder use `output` of backend
 ```
 terraform {
   backend "s3" {
@@ -138,7 +171,7 @@ terraform {
 terraform init
 terraform apply --auto-approve
 ```
-### 3. Outputs:
+#### 3. Outputs:
 ```
 Jenkins-Agent = "ssh -i ~/Window2.pem ubuntu@13.230.64.196"
 Jenkins-Server = "ssh -i ~/Window2.pem ubuntu@35.73.43.3"
