@@ -144,28 +144,16 @@ resource "aws_eip" "Sonarqube-Server" {
 resource "aws_eip_association" "eip_assoc_to_Jenkins-Server" {
   instance_id   = aws_instance.Jenkins-Server.id
   allocation_id = aws_eip.Jenkins-Server.id
-  tags = {
-    Name = "Jenkin-Server"
-    Env = "Development"
-  }
 }
 
 resource "aws_eip_association" "eip_assoc_to_Jenkins-Agent" {
   instance_id   = aws_instance.Jenkins-Agent.id
   allocation_id = aws_eip.Jenkins-Agent.id
-  tags = {
-    Name = "Jenkin-Agent"
-    Env = "Development"
-  }
 }
 
 resource "aws_eip_association" "eip_assoc_to_Sonarqube-Server" {
   instance_id   = aws_instance.Sonarqube-Server.id
   allocation_id = aws_eip.Sonarqube-Server.id
-  tags = {
-    Name = "Sonarqube-Server"
-    Env = "Development"
-  }
 }
 
 resource "aws_instance" "Jenkins-Server" {
