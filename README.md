@@ -181,6 +181,20 @@ Sonarqube-Server = "ssh -i ~/Window2.pem ubuntu@18.178.9.91"
 ```
 #### 4. Configure Sonarqube-server
 Copy `<your-sonarqube-server-public-ip>:9000` and open it in your browser
+
+Login with default username `admin` and default password `admin`
+
+Navigate to `top right` corner > `My Account` > `Security` ( second tab )  
+Generate token
+
+* Name : Whatever you want
+* Expires in : Whatever you want > `Generate` > `Copy`
+
+Navigate to  `Administration` > `Configuration` > `Webhooks` > `Create` > 
+
+* Name : whatever you want
+* URL : `<your-jenkins-server-public-ip>:8080/sonarqube-webhook` > `Create`
+
 #### 5. Configure Jenkins-Master
 Copy `<your-Jenkins-Master-public-ip>:8080` and open it in your browser
 
