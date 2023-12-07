@@ -14,6 +14,7 @@ This link with two repositories :
   * Sonarqube-server ( docker, sonarqube )
 ## Prerequisites
 * [git](https://git-scm.com/downloads)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/)
 * [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [awscli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 * [config-profile](https://docs.aws.amazon.com/cli/latest/reference/configure/)
@@ -24,12 +25,14 @@ This link with two repositories :
 git clone https://github.com/haquocdat543/devops-infra.git
 cd devops-infra
 ```
-### 2. Initialize backend
+### 2. Backend
 ```
 cd backend
 terraform init
 terraform apply --auto-approve
 ```
+#### 1. Enter value
+
 ```
 Terraform has been successfully initialized!
 You may now begin working with Terraform. Try running "terraform plan" to see
@@ -44,7 +47,7 @@ var.project
 ```
 You just need to enter you backend name. Ex: your name
 
-Output:
+#### 2. Output:
 ```
 Outputs:
 config = {
@@ -56,11 +59,13 @@ config = {
 [root@ip-172-31-47-29 backend]#
 ```
 keep it elsewhere, we will use it later.
-### 3. Initialize Eks
+### 3. EKS
 Change directory to `eks`
 ```
 cd ../eks
 ```
+#### 1. Modified backend
+
 Before we initialize it we need to modified `main.tf` file in eks folder use `output` of backend
 ```
 terraform {
@@ -74,3 +79,32 @@ terraform {
   }
 }
 ```
+#### 2. Initialize Eks cluster
+```
+terraform init
+terraform apply --auto-approve
+```
+#### 3. Update kubeconfig
+If you modified `eks cluster name` in main.tf you need to change below command follow you eks cluster name.
+```
+aws eks update-kubeconfig --name my-eks
+```
+#### 4. Install ArgoCD
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+#### 5. Expose ArgoCD service to Internet
+```
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+#### 6. Get loadbalancer dns name
+```
+kubectl config set-context --current --namespace argocd
+kubectl get svc 
+```
+Output:
+```
+
+```
+
