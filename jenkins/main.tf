@@ -180,6 +180,10 @@ resource "aws_instance" "Jenkins-Server" {
 	    "Name" = "Jenkins-Server"
 	    "Env" = "Dev"
 	}
+    }
+  network_interface {
+    device_index         = 0
+    network_interface_id = aws_network_interface.Jenkins-Master.id
   }
 }
 
@@ -198,6 +202,10 @@ resource "aws_instance" "Jenkins-Agent" {
 	    "Env" = "Dev"
 	}
   }
+  network_interface {
+    device_index         = 0
+    network_interface_id = aws_network_interface.Jenkins-Agent.id
+  }
 }
 
 resource "aws_instance" "Sonarqube-Server" {
@@ -214,6 +222,10 @@ resource "aws_instance" "Sonarqube-Server" {
 	    "Name" = "Sonarqube-Server"
 	    "Env" = "Dev"
 	}
+    }
+  network_interface {
+    device_index         = 0
+    network_interface_id = aws_network_interface.Sonarqube-Server.id
   }
 }
 #Output
