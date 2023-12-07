@@ -19,12 +19,12 @@ This link with two repositories :
 * [config-profile](https://docs.aws.amazon.com/cli/latest/reference/configure/)
 
 ## Start
-### Clone project
+### 1. Clone project
 ```
 git clone https://github.com/haquocdat543/devops-infra.git
 cd devops-infra
 ```
-### Initialize backend
+### 2. Initialize backend
 ```
 cd backend
 terraform init
@@ -43,6 +43,7 @@ var.project
   Enter a value:
 ```
 You just need to enter you backend name. Ex: your name
+
 Output:
 ```
 Outputs:
@@ -54,4 +55,22 @@ config = {
 }
 [root@ip-172-31-47-29 backend]#
 ```
-
+keep it elsewhere, we will use it later.
+### 3. Initialize Eks
+Change directory to `eks`
+```
+cd ../eks
+```
+Before we initialize it we need to modified `main.tf` file in eks folder use `output` of backend
+```
+terraform {
+  backend "s3" {
+    bucket         = "hqd-s3-backend"
+    key            = "Eks/terraform.tfstate"
+    region         = "ap-northeast-1"
+    encrypt        = "true"
+    role_arn       = "arn:aws:iam::095368940515:role/HqdS3BackendRole"
+    dynamodb_table = "hqs-s3-backend"
+  }
+}
+```
