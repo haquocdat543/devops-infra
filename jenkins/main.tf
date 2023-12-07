@@ -197,11 +197,6 @@ resource "aws_instance" "Jenkins-Server" {
   }
 }
 
-resource "aws_eip_association" "eip_assoc_to_Jenkins-Agent" {
-  instance_id   = aws_instance.Jenkins-Agent.id
-  allocation_id = aws_eip.Jenkins-Agent.id
-}
-
 resource "aws_instance" "Jenkins-Agent" {
   ami               = var.ami_id
   instance_type     = "t3.medium"
@@ -217,12 +212,6 @@ resource "aws_instance" "Jenkins-Agent" {
 	    "Env" = "Dev"
 	}
   }
-}
-
-
-resource "aws_eip_association" "eip_assoc_to_Sonarqube-Server" {
-  instance_id   = aws_instance.Sonarqube-Server.id
-  allocation_id = aws_eip.Sonarqube-Server.id
 }
 
 resource "aws_instance" "Sonarqube-Server" {
