@@ -219,3 +219,22 @@ Navigate to `Manage Jenkins` > `Credentials` and add some credentials :
 * sonarqube ( id: sonar-server, secret: your-sonar-secret )
 * docker ( id: docker, username: your-dockerhub-username, password: your-dockerhub-password )
 * ubuntu ( id: ubuntu, ubuntu, password: your-ubuntu-password )
+
+Navigate to `Manage Jenkins` > `System` and configure it :
+
+* sonarqube ( name: sonar-server, Server-URL: your-sonar-url, Server-authentication-server: your-sonar-token )
+
+Navigate to `Manage Jenkins` > `Nodes` and configure it :
+
+Click add nodes
+* Node name: Jenkins-Agent
+* Name: Jenkins-Agent
+* Number of executors : 2
+* Remote root directory : /home/ubuntu
+* Labels : Jenkins-Agent
+* Launch method : Launch Agent via SSH
+* Credentials : ubuntu
+* Host Key Verification Strategy : None Verifying Verification Strategy
+
+Click save
+
