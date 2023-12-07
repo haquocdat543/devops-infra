@@ -180,9 +180,9 @@ Jenkins-Server = "ssh -i ~/Window2.pem ubuntu@35.73.43.3"
 Sonarqube-Server = "ssh -i ~/Window2.pem ubuntu@18.178.9.91"
 ```
 #### 4. Configure Sonarqube-server
-Copy <your-sonarqube-server-public-ip>:9000 and open it in your browser
+Copy `<your-sonarqube-server-public-ip>:9000` and open it in your browser
 #### 5. Configure Jenkins-Master
-Copy <your-Jenkins-Master-public-ip>:8080 and open it in your browser
+Copy `<your-Jenkins-Master-public-ip>:8080` and open it in your browser
 
 ssh to Jenkins-Master and get password
 ```
@@ -192,4 +192,30 @@ Output will be like this :
 ```
 22daa09214ed43a08902f31917de7b76
 ```
+Copy password and login with default password `admin`
 
+Navigate to `Manage Jenkins` > `Plugins` and Install these plugins :
+
+* Nodejs
+* Eclispe Temurin Installer
+* Sonarqube scanner
+* Docker
+* Docker Commons
+* Docker Pipeline
+* Docker API
+* Docker build steps
+
+After install you need to `restart` jenkins to take effect
+
+Navigate to `Manage Jenkins` > `Tools` and configure plugins:
+
+* JDK ( name: jdk17, version: jdk17.0.8+5 )
+* Nodejs ( name: node16, version: 16.18.0 ) version allow 16 - 18
+* Sonar scanner ( name: sonar, version: Sonarqube Scanner 5.0.1.3006 )
+* Docker ( name: docker, version: latest )
+
+Navigate to `Manage Jenkins` > `Credentials` and add some credentials :
+* github ( id: github , username: your-github-user-name, password: your-token )
+* sonarqube ( id: sonar-server, secret: your-sonar-secret )
+* docker ( id: docker, username: your-dockerhub-username, password: your-dockerhub-password )
+* ubuntu ( id: ubuntu, ubuntu, password: your-ubuntu-password )
