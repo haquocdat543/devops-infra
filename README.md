@@ -179,4 +179,17 @@ Jenkins-Agent = "ssh -i ~/Window2.pem ubuntu@13.230.64.196"
 Jenkins-Server = "ssh -i ~/Window2.pem ubuntu@35.73.43.3"
 Sonarqube-Server = "ssh -i ~/Window2.pem ubuntu@18.178.9.91"
 ```
+#### 4. Configure Sonarqube-server
+Copy <your-sonarqube-server-public-ip>:9000 and open it in your browser
+#### 5. Configure Jenkins-Master
+Copy <your-Jenkins-Master-public-ip>:8080 and open it in your browser
+
+ssh to Jenkins-Master and get password
+```
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+Output will be like this :
+```
+22daa09214ed43a08902f31917de7b76
+```
 
