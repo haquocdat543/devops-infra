@@ -106,12 +106,12 @@ resource "aws_security_group" "JenkinsSecurityGroup" {
   }
 }
 # Create a network interface with an ip in the subnet that was created step 4
-resource "aws_network_interface" "Jenkins-Server" {
+resource "aws_network_interface" "Jenkins-Master" {
   subnet_id       = aws_subnet.JenkinsSubnet.id
   private_ips     = ["10.0.0.51"]
   security_groups = [aws_security_group.JenkinsSecurityGroup.id]
   tags = {
-    Name = "Jenkin-Server"
+    Name = "Jenkin-Master"
     Env = "Development"
   }
 }
