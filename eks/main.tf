@@ -73,19 +73,11 @@ resource "aws_subnet" "public2" {
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.public1.id
   route_table_id = aws_route_table.ProdRouteTable.id
-  tags = {
-    Name = "Eks-Public-1-Association"
-    Env = "Development"
-  }
 }
 
 resource "aws_route_table_association" "b" {
   subnet_id      = aws_subnet.public2.id
   route_table_id = aws_route_table.ProdRouteTable.id
-  tags = {
-    Name = "Eks-Public-2-Association"
-    Env = "Development"
-  }
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -113,10 +105,6 @@ resource "aws_iam_role" "eks-role" {
 resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.eks-role.name
-  tags = {
-    Name = "Eks-cicd-role-attachment"
-    Env = "Development"
-  }
 }
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
