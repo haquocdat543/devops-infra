@@ -129,26 +129,14 @@ resource "aws_network_interface" "Sonarqube-Server" {
 # Assign an elastic IP to the network interface created in step 7
 resource "aws_eip" "Jenkins-Server" {
   domain                    = "vpc"
-  tags = {
-    Name = "Jenkin-Server"
-    Env = "Development"
-  }
 }
 
 resource "aws_eip" "Jenkins-Agent" {
   domain                    = "vpc"
-  tags = {
-    Name = "Jenkin-Agent"
-    Env = "Development"
-  }
 }
 
 resource "aws_eip" "Sonarqube-Server" {
   domain                    = "vpc"
-  tags = {
-    Name = "Sonarqube-Server"
-    Env = "Development"
-  }
 }
 
 # Associate EIP to EC2 instances ENI
