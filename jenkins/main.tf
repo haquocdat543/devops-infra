@@ -185,7 +185,7 @@ resource "aws_instance" "Jenkins-Server" {
   instance_type     = "t2.micro"
   availability_zone = "ap-northeast-1a"
   key_name          = var.key_pair
-  user_data         = file("./scripts/jenkins-server.sh")
+  user_data         = file("./scripts/jenkins-master.sh")
   root_block_device {
     volume_size = 15
     volume_type = "gp3"
@@ -219,7 +219,7 @@ resource "aws_instance" "Sonarqube-Server" {
   instance_type     = "t3.medium"
   availability_zone = "ap-northeast-1a"
   key_name          = var.key_pair
-  user_data         = file("./scripts/sonarqube-server.sh")
+  user_data         = file("./scripts/sonarqube.sh")
   root_block_device {
     volume_size = 15
     volume_type = "gp3"
