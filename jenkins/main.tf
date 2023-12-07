@@ -135,7 +135,7 @@ resource "aws_eip" "Jenkins-Server" {
   }
 }
 
-resource "aws_eip" "Jenkin-Agent" {
+resource "aws_eip" "Jenkins-Agent" {
   domain                    = "vpc"
   tags = {
     Name = "Jenkin-Agent"
