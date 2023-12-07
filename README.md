@@ -1,6 +1,10 @@
 # devops-infra
 This is a demonstration of cicd project
 
+This link with two repositories :
+* [devops-vue](https://github.com/haquocdat543/devops-vue.git)
+* [devops-argocd](https://github.com/haquocdat543/devops-argocd.git)
+
 Components
 * Backend ( standard )
 * Eks-cluster ( 3 nodes )
