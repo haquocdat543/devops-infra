@@ -107,4 +107,41 @@ Output:
 ```
 
 ```
+#### 7. Get argocd password
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+### 4. Jenkin
+
+Change directory to `jenkins`
+```
+cd ../jenkins
+```
+#### 1. Modified backend
+
+Before we initialize it we need to modified `main.tf` file in eks folder use `output` of backend
+```
+terraform {
+  backend "s3" {
+    bucket         = "hqd-s3-backend"
+    key            = "Eks/terraform.tfstate"
+    region         = "ap-northeast-1"
+    encrypt        = "true"
+    role_arn       = "arn:aws:iam::095368940515:role/HqdS3BackendRole"
+    dynamodb_table = "hqs-s3-backend"
+  }
+}
+```
+#### 2. Initialize Jenkins
+```
+terraform init
+terraform apply --auto-approve
+```
+### 3. Outputs:
+```
+Jenkins-Agent = "ssh -i ~/Window2.pem ubuntu@13.230.64.196"
+Jenkins-Server = "ssh -i ~/Window2.pem ubuntu@35.73.43.3"
+Sonarqube-Server = "ssh -i ~/Window2.pem ubuntu@18.178.9.91"
+```
 
