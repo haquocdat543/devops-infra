@@ -144,6 +144,8 @@ Copy Loadbalancer dns name of `argocd-server` and open in your browser
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
+#### 8. Apply argocd project
+Navigate to [devops-argocd](https://github.com/haquocdat543/devops-argocd.git) and follow there instructions
 
 ### 4. Jenkin
 
