@@ -228,6 +228,7 @@ Navigate to `Manage Jenkins` > `Nodes` and configure it :
 
 Click add nodes
 * Node name: Jenkins-Agent
+* Permanent: yes
 * Name: Jenkins-Agent
 * Number of executors : 2
 * Remote root directory : /home/ubuntu
@@ -238,3 +239,20 @@ Click add nodes
 
 Click save
 
+Create pipeline
+
+Navigate to `Dashboard` > `new item`
+* Name : Every thing you want
+* Type: pipeline > `OK`
+* Discard old builds :
+  * Max # of builds to keep
+* Pipeline - definition : Pipeline script from SCM
+  * SCM : Git
+    * Repository URL : your-repo-link
+    * Credential : github
+    * Branches to build
+      * Branch specifier : main
+
+Click `OK`
+
+Click `Build Now`
