@@ -95,7 +95,7 @@ Jenkins-Agent = "ssh -i ~/Window2.pem ubuntu@13.230.64.196"
 Jenkins-Server = "ssh -i ~/Window2.pem ubuntu@35.73.43.3"
 Sonarqube-Server = "ssh -i ~/Window2.pem ubuntu@18.178.9.91"
 ```
-#### 4. Configure Sonarqube-server
+#### 3. Configure Sonarqube-server
 Copy `<your-sonarqube-server-public-ip>:9000` and open it in your browser
 ![Sonarqube-open](./screenshots/37.jpg)
 Login with default username `admin` and default password `admin`
