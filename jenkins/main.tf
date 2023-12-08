@@ -126,7 +126,7 @@ resource "aws_network_interface" "Sonarqube-Server" {
 }
 
 # Assign an elastic IP to the network interface created in step 7
-resource "aws_eip" "Jenkins-Server" {
+resource "aws_eip" "Jenkins-Master" {
   domain                    = "vpc"
 }
 
@@ -140,9 +140,9 @@ resource "aws_eip" "Sonarqube-Server" {
 
 # Associate EIP to EC2 instances ENI
 
-resource "aws_eip_association" "eip_assoc_to_Jenkins-Server" {
-  instance_id   = aws_instance.Jenkins-Server.id
-  allocation_id = aws_eip.Jenkins-Server.id
+resource "aws_eip_association" "eip_assoc_to_Jenkins-Master" {
+  instance_id   = aws_instance.Jenkins-Master.id
+  allocation_id = aws_eip.Jenkins-Master.id
 }
 
 resource "aws_eip_association" "eip_assoc_to_Jenkins-Agent" {
@@ -155,7 +155,7 @@ resource "aws_eip_association" "eip_assoc_to_Sonarqube-Server" {
   allocation_id = aws_eip.Sonarqube-Server.id
 }
 
-resource "aws_instance" "Jenkins-Server" {
+resource "aws_instance" "Jenkins-Master" {
   ami               = var.ami_id
   instance_type     = "t2.micro"
   availability_zone = "ap-northeast-1a"
@@ -166,7 +166,7 @@ resource "aws_instance" "Jenkins-Server" {
     volume_type = "gp3"
     encrypted   = true
     tags	= {
-	    "Name" = "Jenkins-Server"
+	    "Name" = "Jenkins-Master"
 	    "Env" = "Dev"
 	}
     }
@@ -218,8 +218,8 @@ resource "aws_instance" "Sonarqube-Server" {
   }
 }
 #Output
-output "Jenkins-Server" {
-  value = "ssh -i ~/${var.key_pair}.pem ubuntu@${aws_eip.Jenkins-Server.public_ip}"
+output "Jenkins-Master" {
+  value = "ssh -i ~/${var.key_pair}.pem ubuntu@${aws_eip.Jenkins-Master.public_ip}"
 }
 output "Jenkins-Agent" {
   value = "ssh -i ~/${var.key_pair}.pem ubuntu@${aws_eip.Jenkins-Agent.public_ip}"
