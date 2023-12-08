@@ -148,7 +148,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 #### 8. Apply argocd project
 Navigate to [devops-argocd](https://github.com/haquocdat543/devops-argocd.git) and follow there instructions
 
-### 4. Jenkins
+### 4. Servers ( Jenkins-Master, Jenkins-Agent, Sonarqube-Server )
 
 Change directory to `jenkins`
 ```
@@ -198,8 +198,18 @@ Navigate to  `Administration` > `Configuration` > `Webhooks` > `Create` >
 
 * Name : whatever you want
 * URL : `<your-jenkins-server-public-ip>:8080/sonarqube-webhook` > `Create`
-
-#### 5. Configure Jenkins-Master
+#### 5. Configure Jenkins-Agent
+ssh to Jenkins-Agent and set password to ubuntu user ( you can use ssh key instead )
+```
+password ubuntu
+```
+```
+password
+```
+```
+confirm password
+```
+#### 6. Configure Jenkins-Master
 Copy `<your-Jenkins-Master-public-ip>:8080` and open it in your browser
 
 ssh to Jenkins-Master and get password
@@ -236,7 +246,7 @@ Navigate to `Manage Jenkins` > `Credentials` and add some credentials :
 * github ( id: github , username: your-github-user-name, password: your-token )
 * sonarqube ( id: sonar-server, secret: your-sonar-secret )
 * docker ( id: docker, username: your-dockerhub-username, password: your-dockerhub-password )
-* ubuntu ( id: ubuntu, ubuntu, password: your-ubuntu-password )
+* ubuntu ( id: ubuntu, ubuntu, password: your-ubuntu-password ) ( You can use ssh key instead )
 
 Navigate to `Manage Jenkins` > `System` and configure it :
 
@@ -275,7 +285,7 @@ Click `OK`
 
 Click `Build Now`
 
-Now let's build version 2
+##### 6. Now let's build version 2
 
 Navigate to your `frontend-backend repo`, in my case it is [devops-vue](https://github.com/haquocdat543/devops-vue.git)
 
