@@ -60,119 +60,7 @@ config = {
 [root@ip-172-31-47-29 backend]#
 ```
 keep it elsewhere, we will use it later.
-### 3. EKS
-Change directory to `eks`
-```
-cd ../eks
-```
-#### 1. Modified backend
-
-Before we initialize it we need to modified `main.tf` file in eks folder use `output` of backend
-```
-terraform {
-  backend "s3" {
-    bucket         = "hqd-s3-backend"
-    key            = "Eks/terraform.tfstate"
-    region         = "ap-northeast-1"
-    encrypt        = "true"
-    role_arn       = "arn:aws:iam::095368940515:role/HqdS3BackendRole"
-    dynamodb_table = "hqs-s3-backend"
-  }
-}
-```
-#### 2. Initialize Eks cluster
-```
-terraform init
-terraform apply --auto-approve
-```
-Outputs:
-```
-endpoint = "https://0BA23B64A316C8241778E514A15DA062.gr7.ap-northeast-1.eks.amazonaws.com"
-```
-#### 3. Update kubeconfig
-If you modified `eks cluster name` in main.tf you need to change below command follow you eks cluster name.
-```
-aws eks update-kubeconfig --name my-eks
-```
-#### 4. Install ArgoCD
-```
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
-#### 5. Expose ArgoCD service to Internet
-```
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-```
-#### 6. Get loadbalancer dns name
-```
-kubectl config set-context --current --namespace argocd
-kubectl get svc 
-```
-Output:
-```
-[root@ip-172-31-47-29 eks]# kubectl get svc
-NAME                                      TYPE           CLUSTER-IP       EXTERN
-AL-IP                                                                   PORT(S)
-                     AGE
-argocd-applicationset-controller          ClusterIP      172.20.151.199   <none>
-                                                                        7000/TCP
-,8080/TCP            18s
-argocd-dex-server                         ClusterIP      172.20.23.92     <none>
-                                                                        5556/TCP
-,5557/TCP,5558/TCP   18s
-argocd-metrics                            ClusterIP      172.20.76.23     <none>
-                                                                        8082/TCP
-                     18s
-argocd-notifications-controller-metrics   ClusterIP      172.20.117.174   <none>
-                                                                        9001/TCP
-                     18s
-argocd-redis                              ClusterIP      172.20.92.220    <none>
-                                                                        6379/TCP
-                     18s
-argocd-repo-server                        ClusterIP      172.20.183.168   <none>
-                                                                        8081/TCP
-,8084/TCP            18s
-argocd-server                             LoadBalancer   172.20.93.209    a330c2
-0a82437414eaa3d06b6e62a7be-867279894.ap-northeast-1.elb.amazonaws.com   80:32274
-/TCP,443:31130/TCP   18s
-argocd-server-metrics                     ClusterIP      172.20.33.154    <none>
-                                                                        8083/TCP
-                     18s
-[root@ip-172-31-47-29 eks]#
-```
-Copy Loadbalancer dns name of `argocd-server` and open in your browser
-#### 7. Get argocd password
-```
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-```
-![ArgoLogin](./screenshots/29.jpg)
-![ArgoLogin](./screenshots/30.jpg)
-![ArgoLogin](./screenshots/31.jpg)
-![ArgoLogin](./screenshots/32.jpg)
-![ArgoLogin](./screenshots/33.jpg)
-#### 8. Clone repo
-```
-git clone https://github.com/haquocdat543/devops-argocd.git
-cd devops-argocd
-```
-#### 9. Apply argo app
-```
-kubectl apply -f argocd.yaml
-```
-#### 10. Check argocd result
-![ArgoApp](./screenshots/34.jpg)
-![ArgoAppResources](./screenshots/35.jpg)
-![ArgoAppResources](./screenshots/36.jpg)
-![ArgoAppPodView](./screenshots/55.jpg)
-#### 11. Expose app to internet
-```
-kubectl patch svc myapp-service -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-kubectl get svc
-```
-Result:
-![VueVersion1](./screenshots/56.jpg)
-
-### 4. Servers ( Jenkins-Master, Jenkins-Agent, Sonarqube-Server )
+### 3. Servers ( Jenkins-Master, Jenkins-Agent, Sonarqube-Server )
 
 Change directory to `jenkins`
 ```
@@ -332,10 +220,126 @@ Navigate to `Dashboard` > `new item`
     * Credential : github
     * Branches to build
       * Branch specifier : main
+![CreatePipeline](./screenshots/26.jpg)
+![CreatePipeline](./screenshots/27.jpg)
+![CreatePipeline](./screenshots/28.jpg)
 
 Click `OK`
 
 Click `Build Now`
+![BuildVersion1Successful](./screenshots/50.jpg)
+
+### 4. EKS
+Change directory to `eks`
+```
+cd ../eks
+```
+#### 1. Modified backend
+
+Before we initialize it we need to modified `main.tf` file in eks folder use `output` of backend
+```
+terraform {
+  backend "s3" {
+    bucket         = "hqd-s3-backend"
+    key            = "Eks/terraform.tfstate"
+    region         = "ap-northeast-1"
+    encrypt        = "true"
+    role_arn       = "arn:aws:iam::095368940515:role/HqdS3BackendRole"
+    dynamodb_table = "hqs-s3-backend"
+  }
+}
+```
+#### 2. Initialize Eks cluster
+```
+terraform init
+terraform apply --auto-approve
+```
+Outputs:
+```
+endpoint = "https://0BA23B64A316C8241778E514A15DA062.gr7.ap-northeast-1.eks.amazonaws.com"
+```
+#### 3. Update kubeconfig
+If you modified `eks cluster name` in main.tf you need to change below command follow you eks cluster name.
+```
+aws eks update-kubeconfig --name my-eks
+```
+#### 4. Install ArgoCD
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+#### 5. Expose ArgoCD service to Internet
+```
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+#### 6. Get loadbalancer dns name
+```
+kubectl config set-context --current --namespace argocd
+kubectl get svc 
+```
+Output:
+```
+[root@ip-172-31-47-29 eks]# kubectl get svc
+NAME                                      TYPE           CLUSTER-IP       EXTERN
+AL-IP                                                                   PORT(S)
+                     AGE
+argocd-applicationset-controller          ClusterIP      172.20.151.199   <none>
+                                                                        7000/TCP
+,8080/TCP            18s
+argocd-dex-server                         ClusterIP      172.20.23.92     <none>
+                                                                        5556/TCP
+,5557/TCP,5558/TCP   18s
+argocd-metrics                            ClusterIP      172.20.76.23     <none>
+                                                                        8082/TCP
+                     18s
+argocd-notifications-controller-metrics   ClusterIP      172.20.117.174   <none>
+                                                                        9001/TCP
+                     18s
+argocd-redis                              ClusterIP      172.20.92.220    <none>
+                                                                        6379/TCP
+                     18s
+argocd-repo-server                        ClusterIP      172.20.183.168   <none>
+                                                                        8081/TCP
+,8084/TCP            18s
+argocd-server                             LoadBalancer   172.20.93.209    a330c2
+0a82437414eaa3d06b6e62a7be-867279894.ap-northeast-1.elb.amazonaws.com   80:32274
+/TCP,443:31130/TCP   18s
+argocd-server-metrics                     ClusterIP      172.20.33.154    <none>
+                                                                        8083/TCP
+                     18s
+[root@ip-172-31-47-29 eks]#
+```
+Copy Loadbalancer dns name of `argocd-server` and open in your browser
+#### 7. Get argocd password
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+![ArgoLogin](./screenshots/29.jpg)
+![ArgoLogin](./screenshots/30.jpg)
+![ArgoLogin](./screenshots/31.jpg)
+![ArgoLogin](./screenshots/32.jpg)
+![ArgoLogin](./screenshots/33.jpg)
+#### 8. Clone repo
+```
+git clone https://github.com/haquocdat543/devops-argocd.git
+cd devops-argocd
+```
+#### 9. Apply argo app
+```
+kubectl apply -f argocd.yaml
+```
+#### 10. Check argocd result
+![ArgoApp](./screenshots/34.jpg)
+![ArgoAppResources](./screenshots/35.jpg)
+![ArgoAppResources](./screenshots/36.jpg)
+![ArgoAppPodView](./screenshots/55.jpg)
+#### 11. Expose app to internet
+```
+kubectl patch svc myapp-service -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+kubectl get svc
+```
+Result:
+![VueVersion1](./screenshots/56.jpg)
 
 ### 5. Now let's build version 2
 
