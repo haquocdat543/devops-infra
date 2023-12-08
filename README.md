@@ -289,3 +289,11 @@ Check results :
 * Dockerhub
 * ArgoCD app
 * Our vue app
+
+### 5. Destroy
+Change directory to each folder `backend`, `eks`, `jenkins` and run following commands :
+```
+terraform destroy --auto-approve
+```
+
+
