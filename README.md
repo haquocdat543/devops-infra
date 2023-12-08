@@ -18,6 +18,7 @@ This link with two repositories :
 * [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [awscli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 * [config-profile](https://docs.aws.amazon.com/cli/latest/reference/configure/)
+* [github-token](https://docs.github.com/en/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) ( allow access to `argocd-repo` and `frontend-backend repo` )
 
 ## Start
 ### 1. Clone project
@@ -295,5 +296,3 @@ Change directory to each folder `backend`, `eks`, `jenkins` and run following co
 ```
 terraform destroy --auto-approve
 ```
-
-
