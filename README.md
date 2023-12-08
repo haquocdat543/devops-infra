@@ -148,7 +148,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 #### 8. Apply argocd project
 Navigate to [devops-argocd](https://github.com/haquocdat543/devops-argocd.git) and follow there instructions
 
-### 4. Jenkin
+### 4. Jenkins
 
 Change directory to `jenkins`
 ```
@@ -174,6 +174,9 @@ terraform {
 terraform init
 terraform apply --auto-approve
 ```
+
+Enter your keyname:
+If you dont have it, reference [keypair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) to create it
 #### 3. Outputs:
 ```
 Jenkins-Agent = "ssh -i ~/Window2.pem ubuntu@13.230.64.196"
