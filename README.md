@@ -253,6 +253,7 @@ Output will be like this :
 22daa09214ed43a08902f31917de7b76
 ```
 Copy password and login with default password `admin`
+![JenkinsLogin](./screenshots/2.jpg)
 
 Navigate to `Manage Jenkins` > `Plugins` and Install these plugins :
 
@@ -264,25 +265,39 @@ Navigate to `Manage Jenkins` > `Plugins` and Install these plugins :
 * Docker Pipeline
 * Docker API
 * Docker build steps
+![JenkinsPlugins](./screenshots/10.jpg)
+![JenkinsPlugins](./screenshots/11.jpg)
+![JenkinsInstall](./screenshots/12.jpg)
 
 After install you need to `restart` jenkins to take effect
+![JenkinsRestart](./screenshots/13.jpg)
+![JenkinsRelogin](./screenshots/14.jpg)
 
 Navigate to `Manage Jenkins` > `Tools` and configure plugins:
 
 * JDK ( name: jdk17, version: jdk17.0.8+5 )
+![jdk](./screenshots/16.jpg)
 * Nodejs ( name: node16, version: 16.18.0 ) version allow 16 - 18
+![nodejs](./screenshots/18.jpg)
 * Sonar scanner ( name: sonar, version: Sonarqube Scanner 5.0.1.3006 )
+![sonar](./screenshots/17.jpg)
 * Docker ( name: docker, version: latest )
+![docker](./screenshots/19.jpg)
 
 Navigate to `Manage Jenkins` > `Credentials` and add some credentials :
 * github ( id: github , username: your-github-user-name, password: your-token )
+![github](./screenshots/8.jpg)
 * sonarqube ( id: sonar-server, secret: your-sonar-secret )
+![sonar-server](./screenshots/5.jpg)
 * docker ( id: docker, username: your-dockerhub-username, password: your-dockerhub-password )
+![docker](./screenshots/7.jpg)
 * ubuntu ( id: ubuntu, ubuntu, password: your-ubuntu-password ) ( You can use ssh key instead )
+![ubuntu](./screenshots/6.jpg)
 
 Navigate to `Manage Jenkins` > `System` and configure it :
 
 * sonarqube ( name: sonar-server, Server-URL: your-sonar-url, Server-authentication-server: your-sonar-token )
+![Sonarqube](./screenshots/15.jpg)
 
 Navigate to `Manage Jenkins` > `Nodes` and configure it :
 
@@ -296,6 +311,11 @@ Click add nodes
 * Launch method : Launch Agent via SSH
 * Credentials : ubuntu
 * Host Key Verification Strategy : None Verifying Verification Strategy
+![addNode](./screenshots/21.jpg)
+![addNode](./screenshots/22.jpg)
+![addNode](./screenshots/23.jpg)
+![addNode](./screenshots/24.jpg)
+![addNode](./screenshots/25.jpg)
 
 Click save
 
