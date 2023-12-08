@@ -285,7 +285,7 @@ Click `OK`
 
 Click `Build Now`
 
-##### 6. Now let's build version 2
+### 5. Now let's build version 2
 
 Navigate to your `frontend-backend repo`, in my case it is [devops-vue](https://github.com/haquocdat543/devops-vue.git)
 
@@ -304,7 +304,7 @@ Check results :
 * ArgoCD app
 * Our vue app
 
-### 5. Destroy
+### 6. Destroy
 Change directory to each folder `backend`, `eks`, `jenkins` and run following commands :
 ```
 terraform destroy --auto-approve
