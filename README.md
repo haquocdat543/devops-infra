@@ -305,9 +305,17 @@ Navigate to `Jenkins server` > `Your pipeline` > `Build now`
 
 Check results :
 * Jenkins build
+![BuildVersion2](./screenshots/60.jpg)
+![BuildVersion2Successful](./screenshots/61.jpg)
+![BuildVersion2Successful](./screenshots/62.jpg)
+![BuildVersion2Successful](./screenshots/63.jpg)
 * Dockerhub
+![Dockerhub](./screenshots/64.jpg)
 * ArgoCD app
+![ArgoCDApp](./screenshots/65.jpg)
+![ArgoCDPodView](./screenshots/66.jpg)
 * Our vue app
+![VueAppVersion2](./screenshots/67.jpg)
 
 ### 6. Destroy
 First patch both ( `argocd`, `myapp-service` ) svc to ClusterIP
