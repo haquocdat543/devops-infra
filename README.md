@@ -270,3 +270,15 @@ Navigate to `Dashboard` > `new item`
 Click `OK`
 
 Click `Build Now`
+
+Now let's build version 2
+
+Navigate to your frontend-backend project, in my case it is [devops-vue](https://github.com/haquocdat543/devops-vue.git)
+Update it to version 2
+
+In my case :
+* I will change content to version 2 in App.vue
+* I will change vuev1 to vuev2 in Jenkinsfile
+* Stage all changes and commit it
+
+Navigate to `Jenkins server` > `Your pipeline` > `Build now`
