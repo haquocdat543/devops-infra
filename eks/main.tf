@@ -1,14 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "<your-bucket-name>"
-    key            = "Eks/terraform.tfstate"
-    region         = "ap-northeast-1"
-    encrypt        = "true"
-    role_arn       = "<your-role-arn>"
-    dynamodb_table = "<your-dynamodb-table-name>"
-  }
-}
-
 # Profile configuration
 provider "aws" {
   shared_config_files      = ["~/.aws/config"]
