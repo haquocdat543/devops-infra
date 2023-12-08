@@ -209,19 +209,27 @@ Sonarqube-Server = "ssh -i ~/Window2.pem ubuntu@18.178.9.91"
 ```
 #### 4. Configure Sonarqube-server
 Copy `<your-sonarqube-server-public-ip>:9000` and open it in your browser
-
+![Sonarqube-open](./screenshots/37.jpg)
 Login with default username `admin` and default password `admin`
-
+![Sonarqube-login](./screenshots/38.jpg)
 Navigate to `top right` corner > `My Account` > `Security` ( second tab )  
+![Sonarqube-navigate-to-top-right](./screenshots/39.jpg)
+![Sonarqube-navigate-to-top-right](./screenshots/40.jpg)
+![Sonarqube-navigate-to-my-account](./screenshots/41.jpg)
+![Sonarqube-navigate-to-security-tab](./screenshots/42.jpg)
+![Sonarqube-navigate-to-security-tab](./screenshots/43.jpg)
 Generate token
 
 * Name : Whatever you want
 * Expires in : Whatever you want > `Generate` > `Copy`
+![Generate-token](./screenshots/44.jpg)
+![Copy-token](./screenshots/45.jpg)
 
 Navigate to  `Administration` > `Configuration` > `Webhooks` > `Create` > 
 
 * Name : whatever you want
 * URL : `<your-jenkins-server-public-ip>:8080/sonarqube-webhook` > `Create`
+![Add-Webhook](./screenshots/46.jpg)
 #### 5. Configure Jenkins-Agent
 ssh to Jenkins-Agent and set password to ubuntu user ( you can use ssh key instead )
 ```
