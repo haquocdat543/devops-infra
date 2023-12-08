@@ -295,6 +295,11 @@ In my case :
 * I will change content to version 2 in App.vue
 * I will change vuev1 to vuev2 in Jenkinsfile
 * Stage all changes and commit it
+![UpdateVue](./screenshots/68.jpg)
+![UpdateJenkinsfile](./screenshots/57.jpg)
+![Commit](./screenshots/58.jpg)
+![Push](./screenshots/58.jpg)
+![PushSuccessful](./screenshots/59.jpg)
 
 Navigate to `Jenkins server` > `Your pipeline` > `Build now`
 
