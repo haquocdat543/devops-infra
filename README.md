@@ -273,7 +273,8 @@ Click `Build Now`
 
 Now let's build version 2
 
-Navigate to your frontend-backend project, in my case it is [devops-vue](https://github.com/haquocdat543/devops-vue.git)
+Navigate to your `frontend-backend repo`, in my case it is [devops-vue](https://github.com/haquocdat543/devops-vue.git)
+
 Update it to version 2
 
 In my case :
@@ -282,3 +283,9 @@ In my case :
 * Stage all changes and commit it
 
 Navigate to `Jenkins server` > `Your pipeline` > `Build now`
+
+Check results :
+* Jenkins build
+* Dockerhub
+* ArgoCD app
+* Our vue app
