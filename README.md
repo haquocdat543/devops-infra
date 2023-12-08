@@ -145,8 +145,32 @@ Copy Loadbalancer dns name of `argocd-server` and open in your browser
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
-#### 8. Apply argocd project
-Navigate to [devops-argocd](https://github.com/haquocdat543/devops-argocd.git) and follow there instructions
+![ArgoLogin](./screenshots/29.jpg)
+![ArgoLogin](./screenshots/30.jpg)
+![ArgoLogin](./screenshots/31.jpg)
+![ArgoLogin](./screenshots/32.jpg)
+![ArgoLogin](./screenshots/33.jpg)
+#### 8. Clone repo
+```
+git clone https://github.com/haquocdat543/devops-argocd.git
+cd devops-argocd
+```
+#### 9. Apply argo app
+```
+kubectl apply -f argocd.yaml
+```
+#### 10. Check argocd result
+![ArgoApp](./screenshots/34.jpg)
+![ArgoAppResources](./screenshots/35.jpg)
+![ArgoAppResources](./screenshots/36.jpg)
+![ArgoAppPodView](./screenshots/55.jpg)
+#### 11. Expose app to internet
+```
+kubectl patch svc myapp-service -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+kubectl get svc
+```
+Result:
+![VueVersion1](./screenshots/56.jpg)
 
 ### 4. Servers ( Jenkins-Master, Jenkins-Agent, Sonarqube-Server )
 
