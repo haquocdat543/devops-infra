@@ -305,6 +305,12 @@ Check results :
 * Our vue app
 
 ### 6. Destroy
+First patch both ( `argocd`, `myapp-service` ) svc to ClusterIP
+```
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "ClusterIP"}}'
+kubectl patch svc myapp-service -n argocd -p '{"spec": {"type": "ClusterIP"}}'
+```
+
 Change directory to each folder `backend`, `eks`, `jenkins` and run following commands :
 ```
 terraform destroy --auto-approve
